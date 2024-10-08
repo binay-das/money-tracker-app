@@ -1,5 +1,3 @@
-
-
 export default function TransactionLogs({transactions}) {
     return (
         <div className="transactions">

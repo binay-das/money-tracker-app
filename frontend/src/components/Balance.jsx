@@ -1,5 +1,3 @@
-
-
 export default function Balance({ transactions }) {
     let balance = 0;
     for (const transaction of transactions) {
