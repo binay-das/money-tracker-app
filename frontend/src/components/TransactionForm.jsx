@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { TextField, Button, Grid, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
 export default function TransactionForm({ addTransaction }) {
     const [name, setName] = useState('');
@@ -29,11 +30,11 @@ export default function TransactionForm({ addTransaction }) {
 
         const transactionAmount = isIncome ? amount : -Math.abs(amount);
 
-        addTransaction({ 
-            name, 
-            amount: transactionAmount, 
-            dateTime, 
-            description 
+        addTransaction({
+            name,
+            amount: transactionAmount,
+            dateTime,
+            description
         });
 
         setName('');
@@ -44,7 +45,10 @@ export default function TransactionForm({ addTransaction }) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{
+            // width: '100%',
+            marginTop: '16px'
+        }}>
 
             <input type="text" value={name} onChange={handleName} placeholder='New transaction' />
             <div className="middle">
