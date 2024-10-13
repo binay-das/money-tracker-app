@@ -1,5 +1,5 @@
-import sun from '../assets/brightness.png';
-import moon from '../assets/moon.png';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 export default function ThemeToggle({ toggleTheme, isDarkMode }) {
     return (
@@ -9,19 +9,22 @@ export default function ThemeToggle({ toggleTheme, isDarkMode }) {
                 position: 'fixed',
                 bottom: '20px',
                 right: '20px',
-                backgroundColor: isDarkMode ? '#555' : '#ddd',
+                backgroundColor: isDarkMode ? '#333' : '#ddd',
                 color: isDarkMode ? '#fff' : '#000',
                 border: 'none',
                 borderRadius: '50%',
                 padding: '10px',
                 cursor: 'pointer',
-              }}
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
         >
-            <img 
-                src={isDarkMode ? sun : moon} 
-                alt={isDarkMode ? 'Sun Icon' : 'Moon Icon'} 
-                style={{ width: '50px', height: '50px' }}
-            />
+            {isDarkMode ? (
+                <LightModeIcon style={{ fontSize: '50px' }} />
+            ) : (
+                <DarkModeIcon style={{ fontSize: '50px' }} />
+            )}
         </button>
     );
 }

@@ -44,7 +44,7 @@ export default function TransactionForm({ addTransaction }) {
 
 
     return (
-        <form onSubmit={handleSubmit} action="">
+        <form onSubmit={handleSubmit}>
 
             <input type="text" value={name} onChange={handleName} placeholder='New transaction' />
             <div className="middle">

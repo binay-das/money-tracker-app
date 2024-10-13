@@ -1,9 +1,9 @@
-*{
+* {
   box-sizing: border-box;
   font-family: sans-serif;
 }
 
-.light-mode, 
+.light-mode,
 .dark-mode {
   display: flex;
   flex-direction: column;
@@ -19,18 +19,20 @@ body {
   color: #ddd;
   transition: background-color 0.3s ease;
   min-height: 100vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
-.light-mode{
+.light-mode {
   background-color: #ddd;
   color: #000;
+  transition: background-color 0.3s ease;
 }
+
 .dark-mode {
   background-color: #333;
   color: #fff;
+  transition: background-color 0.3s ease;
 }
-
 
 form {
   display: flex;
@@ -39,33 +41,35 @@ form {
   border-radius: 6px;
 }
 
-
-form input, select {
+form input,
+select {
   padding: 10px;
-  border: 1px solid #666;
   border: none;
   border-radius: 6px;
-  color: #ddd;
   margin-bottom: 12px;
   transition: border 0.3s ease;
 }
 
-form input:focus, select:focus {
+form input:focus,
+select:focus {
   border-color: #888;
 }
 
-.light-mode form input, 
+.light-mode form input,
 .light-mode select {
   background: #f0f0f0;
   color: #333;
-  border: 1px solid #ccc;
 }
-.dark-mode form input, 
+
+.dark-mode form input,
 .dark-mode select {
   background: #222;
   color: #d8d4d4;
 }
 
+select {
+  cursor: pointer;
+}
 
 form .middle {
   display: flex;
@@ -76,7 +80,7 @@ form .second input {
   width: 100%;
 }
 
-  form button {
+form button {
   border: none;
   border-radius: 4px;
   padding: 8px 12px;
@@ -97,29 +101,54 @@ form button:hover {
   margin-top: 20px;
 }
 
-
-.transaction:first-child {
-  border: none;
-}
 .transaction {
   border-top: 1px solid #ddd;
   margin: 8px 0;
   padding: 8px;
+  display: flex;
+  /* justify-content: center;0 */
+  align-items: center;
+  width: 100%;
 }
 
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  /* border: 1px solid red; */
+  width: 100%;
+  padding-right: 24px;
+}
 
+.light-mode .transaction {
+  border-top: 1px solid #333;
+}
 
-.transaction .first, .transaction .second {
+.dark-mode .transaction {
+  border-top: 1px solid #ddd;
+}
+
+.transaction:first-child {
+  border: none;
+}
+
+.transaction .first,
+.transaction .second {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.transaction .first {
+  margin-bottom: 4px;
 }
 
 .transaction .name {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .transaction .amount {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: inherit;
 }
 
@@ -130,9 +159,4 @@ form button:hover {
 
 .transaction .date {
   font-size: 0.8rem;
-}
-
-.light-mode .transaction {
-  background-color: #fff;
-  border-color: #ccc;
 }

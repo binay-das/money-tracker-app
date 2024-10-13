@@ -3,5 +3,5 @@ export default function Balance({ transactions }) {
     for (const transaction of transactions) {
         balance += transaction.amount;
     }
-    return <h1>&#8377; {balance}</h1>;
+    return <h1>Balance: &#8377; {balance}</h1>;
 }
