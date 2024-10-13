@@ -7,7 +7,9 @@ import TransactionLogs from './components/TransactionLogs';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => JSON.parse(localStorage.getItem('isDarkMode')) || false
+  );
 
   const fetchTransactions = async () => {
     const data = await fetch('http://localhost:8080/api/transactions', {
@@ -36,7 +38,11 @@ function App() {
   }
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('isDarkMode', JSON.stringify(newMode));
+      return newMode;
+    });
   }
 
   useEffect(() => {
@@ -60,11 +66,11 @@ function App() {
 
   return (
     <>
-      <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
+      <div className={isDarkMode ? 'dark-mode' : 'light-mode'} >
         <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         <Balance transactions={transactions} />
         <TransactionForm addTransaction={addTransaction} />
-        <TransactionLogs transactions={transactions} />
+        <TransactionLogs transactions={transactions} setTransactions={setTransactions} />
       </div>
     </>
   )
