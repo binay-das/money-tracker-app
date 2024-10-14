@@ -186,4 +186,4 @@ Contributions are welcome! Please follow these steps to contribute:
 ---
 
 ### 🎉 Conclusion
-This project demonstrates the basics of full-stack web development with a focus on simplicity and usability. Feel free to contribute or use it as a base for your personal finance projects!
+This project demonstrates the basics of full-stack web development with a focus on simplicity and usability. Feel free to contribute or provide feedback.
