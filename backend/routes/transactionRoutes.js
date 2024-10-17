@@ -2,16 +2,29 @@ const express = require('express');
 const router = express.Router();
 const transactionModel = require('../models/transaction');
 
-router.post('/transactions', async (req, res) => {
-    const { name, amount, dateTime, description } = req.body;
-    const newTransaction = await transactionModel.create({ name, amount, dateTime, description });
-    res.json(newTransaction);
-    console.log('New transaction added:', newTransaction);
-
-})
 router.get('/transactions', async (req, res) => {
     const transactions = await transactionModel.find({});
     res.json(transactions);
+});
+
+router.post('/transactions', async (req, res) => {
+    try {
+        const { name, amount, dateTime, description } = req.body;
+        if (!name || !amount || !dateTime || !description) {
+            return res.status(400).json({ message: 'Please provide all required fields!' });
+        }
+        if (isNaN(amount) || amount < 0) {
+            return res.status(400).json({ message: 'Invalid amount or amount is less than 0!' });
+        }
+        const newTransaction = await transactionModel.create({
+            name, amount, dateTime, description
+        });
+        res.status(201).json(newTransaction);
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error adding transaction.', error });
+    }
+
 });
 
 router.delete('/transaction/:id', async (req, res) => {
@@ -28,6 +41,6 @@ router.delete('/transaction/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error while deleting transaction!', error });
     }
-})
+});
 
 module.exports = router;

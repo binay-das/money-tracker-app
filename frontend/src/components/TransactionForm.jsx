@@ -3,7 +3,7 @@ import { TextField, Button, Grid, Select, MenuItem, InputLabel, FormControl } fr
 
 export default function TransactionForm({ addTransaction }) {
     const [name, setName] = useState('');
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(null);
     const [isIncome, setIsIncome] = useState(true);
     const [dateTime, setDateTime] = useState('');
     const [description, setDescription] = useState('');
@@ -28,6 +28,15 @@ export default function TransactionForm({ addTransaction }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!name || !amount || !dateTime || !description) {
+            alert('Please fill all required fields');
+            return;
+        }
+        if (isNaN(amount) || Number(amount) <= 0) {
+            alert('Please enter a valid positive amount.');
+            return;
+        }
+
         const transactionAmount = isIncome ? amount : -Math.abs(amount);
 
         addTransaction({
@@ -38,7 +47,7 @@ export default function TransactionForm({ addTransaction }) {
         });
 
         setName('');
-        setAmount(0);
+        setAmount(null);
         setDateTime('');
         setDescription('');
     }
@@ -46,18 +55,17 @@ export default function TransactionForm({ addTransaction }) {
 
     return (
         <form onSubmit={handleSubmit} style={{
-            // width: '100%',
             marginTop: '16px'
         }}>
 
-            <input type="text" value={name} onChange={handleName} placeholder='New transaction' />
+            <input type="text" value={name} onChange={handleName} placeholder='New transaction' required />
             <div className="middle">
                 <select onChange={handleIsIncome}>
                     <option value="credit">Credit (+)</option>
                     <option value="debit">Debit (-)</option>
                 </select>
-                <input type="number" value={amount} onChange={handleAmount} placeholder='Amount' />
-                <input type="datetime-local" value={dateTime} onChange={handleDateTime} />
+                <input type="number" value={amount} onChange={handleAmount} placeholder='Amount (in INR)' required />
+                <input type="datetime-local" value={dateTime} onChange={handleDateTime} required />
 
             </div>
 

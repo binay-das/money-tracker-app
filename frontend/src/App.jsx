@@ -12,29 +12,52 @@ function App() {
   );
 
   const fetchTransactions = async () => {
-    const data = await fetch('http://localhost:8080/api/transactions', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      const data = await fetch('http://localhost:8080/api/transactions', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (!data.ok) {
+        throw new Error('Failed to fetch transactions');
       }
-    })
-    const jsonData = await data.json();
-    setTransactions(jsonData);
-    console.log(transactions);
+
+      const jsonData = await data.json();
+      setTransactions(jsonData);
+      // console.log(transactions);
+
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      alert('Unable to fetch transactions. Please try again later.');
+    }
   }
 
   const addTransaction = async (transaction) => {
-    const url = 'http://localhost:8080/api/transactions';
+    try {
+      // const url = 'http://localhost:8080/api/transactions';
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      const response = fetch('http://localhost:8080/api/transactions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
 
-      body: JSON.stringify(transaction)
+        body: JSON.stringify(transaction)
 
-    }).then(() => fetchTransactions());
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add transaction');
+      }
+
+      await fetchTransactions();
+
+    } catch (error) {
+      
+      console.error('Error adding transaction:', error);
+      alert('Failed to add transaction. Please try again.');
+    }
   }
 
   const toggleTheme = () => {
