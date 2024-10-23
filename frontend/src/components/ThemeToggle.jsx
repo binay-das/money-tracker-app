@@ -1,11 +1,12 @@
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { IconButton } from '@mui/material';
 
 export default function ThemeToggle({ toggleTheme, isDarkMode }) {
     return (
-        <button
+        <IconButton
             onClick={toggleTheme}
-            style={{
+            sx={{
                 position: 'fixed',
                 bottom: '20px',
                 right: '20px',
@@ -20,11 +21,7 @@ export default function ThemeToggle({ toggleTheme, isDarkMode }) {
                 justifyContent: 'center',
             }}
         >
-            {isDarkMode ? (
-                <LightModeIcon style={{ fontSize: '50px' }} />
-            ) : (
-                <DarkModeIcon style={{ fontSize: '50px' }} />
-            )}
-        </button>
+            {isDarkMode ? <LightModeIcon fontSize='/small' /> : <DarkModeIcon fontSize='/small' />}
+        </IconButton>
     );
 }
