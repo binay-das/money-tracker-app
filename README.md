@@ -49,10 +49,12 @@ cd money-tracker-app
 cd backend
 npm install
 ```
-Create a .env file in the backend folder:
+## 🗂️ Environment Variables
+Create a .env file in the backend folder with the following:
+
 ```bash
-MONGO_URI=mongodb://localhost:27017/money-tracker
-PORT=5000
+MONGO_URI=<Enter your Database url here>
+PORT=<Enter your server port>
 ```
 Start the backend server:
 ```bash
@@ -119,13 +121,7 @@ money-tracker-app/
 
 ```
 
-## 🗂️ Environment Variables
-Create a .env file in the backend folder with the following:
 
-```bash
-MONGO_URI=<Enter your Database url here>
-PORT=<Enter your server port>
-```
 
 
 
